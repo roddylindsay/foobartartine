@@ -1,0 +1,66 @@
+<html>
+  <head>
+    <title>Foo Bar Tartine</title>
+    <style>
+      *{font-family:Lucida Sans;}
+      h1 {
+      margin-top: 100px;
+      }
+      #wrap {
+        width: 800px;
+        margin: 0 auto;
+      }
+      #button {
+        margin-bottom: 30px;
+      }
+    </style>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0-alpha1/jquery.js"></script>
+    <script type="text/javascript">
+      function capitalize(string) {
+        return string.charAt(0).toUpperCase() + string.substring(1).toLowerCase();
+      };
+
+      function generateDish() {
+      var ADJ_PROB = 0.5;
+      var STRUCTURE_PROB = 0.5;
+      var adjs = ["chilled", "fried", "smoked", "brined", "culture", "farmer's", "pressed", "cured", "charred", "dill", "sweet", "corned", "kefir", "paprika", "pickled", "truffled", "black", "rye", "sour cream", "preserved"];
+      var ingredients = ["cabbage", "chicken", "tongue", "cheese", "liver", "sturgeon", "chard", "tuna", "beef", "radish", "mushroom", "trout", "carrot", "yoghurt", "lard", "bone marrow", "tripe", "bottarga", "egg", "catfish", "ramp", "tendon", "greens", "fennel", "chicories", "bonito", "potatoes", "garlic"];
+      var structures = ["croquettes", "melt", "stew", "soup", "slab", "bread", "butter", "pickles", "dip", "dumplings", "broth", "tartare", "loin"];
+      var dish = "";
+      if (_.random(0, 100) < ADJ_PROB * 100) {
+        dish += _.sample(adjs) + " ";
+      }
+      dish += _.sample(ingredients) + " ";
+      if (_.random(0, 100) < STRUCTURE_PROB * 100) {
+        dish += _.sample(structures) + " ";
+      }
+      dish += "with ";
+      if (_.random(0, 100) < ADJ_PROB * 100) {
+        dish += _.sample(adjs) + " ";
+      }
+      dish += _.sample(ingredients) + " ";
+      if (_.random(0, 100) < STRUCTURE_PROB * 100) {
+        dish += _.sample(structures) + " ";
+      }
+      return dish;
+      }
+
+                             $(document).ready(function() {
+                             $("#button").click(function() {
+                             var dish = generateDish();
+                             $("#dish").text(capitalize(dish));
+                             });
+                             });
+    </script>
+  </head>
+  <body>
+    <div id="wrap">
+      <h1>Foo Bar Tartine</h1>
+      <button id="button">Generate Dish</button>
+      <div>
+        <span id="dish" />
+      </div>
+    </div>
+  </body>
+</html>
